@@ -5,7 +5,7 @@ machine:
     - rm -rf $REPO
     - mkdir -p ${GOPATH%%:*}/src/github.com/${CIRCLE_PROJECT_USERNAME}
     - cp -r ${HOME}/${CIRCLE_PROJECT_REPONAME} $REPO
-    - git config --global user.email "billings@erisindustries.com"
+    - git config --global user.email "billings@monax.io"
     - git config --global user.name "Billings the Bot"
 
 dependencies:
@@ -17,10 +17,10 @@ test:
   override:
     - cd $REPO && glide install
     - cd $REPO && glide novendor | xargs go test
-    - docker build -t eris/keys-test -f Dockerfile .
+    - docker build -t monax/keys-test -f Dockerfile .
     # TODO: this test breaks the cross-repository paradigm for testing pipeline
     # and needs to be integrated into that standard
-    - docker run -it eris/keys-test /go/src/github.com/eris-ltd/eris-keys/test.sh
+    - docker run -it monax/keys-test /go/src/github.com/monax/keys/test.sh
 
 deployment:
   master:
@@ -30,7 +30,6 @@ deployment:
       - tests/build_tool.sh
       - "docker tag quay.io/eris/keys:build throw:build && docker rmi quay.io/eris/keys:build"
       - docker push quay.io/eris/keys
-      - docs/build.sh master
   develop:
     branch: develop
     commands:
@@ -38,4 +37,3 @@ deployment:
       - tests/build_tool.sh
       - "docker rmi quay.io/eris/keys:latest && docker tag quay.io/eris/keys:build throw:build && docker rmi quay.io/eris/keys:build"
       - docker push quay.io/eris/keys
-      - docs/build.sh

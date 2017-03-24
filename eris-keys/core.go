@@ -7,17 +7,16 @@ import (
 	"hash"
 	"io"
 	"io/ioutil"
+	"log"
 	"os"
 	"path"
 	"path/filepath"
 	"strconv"
 	"time"
 
-	"github.com/eris-ltd/eris-keys/crypto"
+	"github.com/monax/keys/crypto"
 
-	//"github.com/eris-ltd/eris-db/account"
-	tmint_crypto "github.com/eris-ltd/eris-keys/crypto/helpers"
-	log "github.com/eris-ltd/eris-logger"
+	tmint_crypto "github.com/monax/keys/crypto/helpers"
 	"github.com/tendermint/go-wire"
 	"golang.org/x/crypto/ripemd160"
 )
@@ -30,10 +29,10 @@ func GetKey(addr []byte) (*crypto.Key, error) {
 	// first check if the key is unlocked
 	k := AccountManager.GetKey(addr)
 	if k != nil {
-		log.Debugln("Using unlocked key")
+		// Using unlocked key
 		return k, nil
 	}
-	log.Debugln("key is not unlocked")
+	// key is not unlocked
 	// now see if we can find an encrypted version on disk
 	isEncrypted, err := crypto.IsEncryptedKey(AccountManager.KeyStore(), addr)
 	if err == nil && isEncrypted {
@@ -104,7 +103,7 @@ func coreImport(auth, keyType, theKey string) ([]byte, error) {
 	var keyStore crypto.KeyStore
 	var err error
 
-	log.Infof("Importing key. Type (%s). Encrypted (%v)\n", keyType, auth != "")
+	log.Printf("Importing key. Type (%s). Encrypted (%v)\n", keyType, auth != "")
 
 	if auth == "" {
 		if keyStore, err = newKeyStore(); err != nil {
@@ -154,7 +153,7 @@ func coreKeygen(auth, keyType string) ([]byte, error) {
 	var keyStore crypto.KeyStore
 	var err error
 
-	log.Infof("Generating new key. Type (%s). Encrypted (%v)\n", keyType, auth != "")
+	log.Printf("Generating new key. Type (%s). Encrypted (%v)\n", keyType, auth != "")
 
 	if auth == "" {
 		keyStore, err = newKeyStore()
@@ -174,7 +173,7 @@ func coreKeygen(auth, keyType string) ([]byte, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error generating key %s %s", keyType, err)
 	}
-	log.Infof("Generated new key. Address (%x). Type (%s). Encrypted (%v)\n", key.Address, key.Type, auth != "")
+	log.Printf("Generated new key. Address (%x). Type (%s). Encrypted (%v)\n", key.Address, key.Type, auth != "")
 	return key.Address, nil
 }
 

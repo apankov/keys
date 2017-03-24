@@ -18,11 +18,10 @@ package keys
 
 import (
 	"encoding/hex"
-	//"os"
 	"testing"
 	"time"
 
-	"github.com/eris-ltd/eris-keys/crypto"
+	"github.com/monax/keys/crypto"
 )
 
 var (

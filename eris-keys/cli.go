@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 
-	. "github.com/eris-ltd/common/go/common"
-	log "github.com/eris-ltd/eris-logger"
+	. "github.com/monax/keys/common"
 	//"github.com/howeyc/gopass"
 	"github.com/spf13/cobra"
 )
@@ -128,7 +128,7 @@ func cliImport(cmd *cobra.Command, args []string) {
 
 	var auth string
 	if !NoPassword {
-		log.Warn("Please note that this encryption will only take effect if you passed a raw private key (TODO!).")
+		log.Printf("Warning: Please note that this encryption will only take effect if you passed a raw private key (TODO!).")
 		auth = hiddenAuth()
 	}
 

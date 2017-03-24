@@ -1,11 +1,6 @@
 # eris-keys
 
-|[![GoDoc](https://godoc.org/github.com/eris-keys?status.png)](https://godoc.org/github.com/eris-ltd/eris-keys) | Linux |
-|---|-------|
-| Master | [![Circle CI](https://circleci.com/gh/eris-ltd/eris-keys/tree/master.svg?style=svg)](https://circleci.com/gh/eris-ltd/eris-keys/tree/master) |
-| Develop | [![Circle CI](https://circleci.com/gh/eris-ltd/eris-keys/tree/develop.svg?style=svg)](https://circleci.com/gh/eris-ltd/eris-keys/tree/develop) |
-
-Eris Keys is a simple **dev-only** tool for generating keys, producing and verifying signatures. These features are exposed through [eris-cli](https://monax.io/docs/documentation/cli), the entry point for the Eris platform.
+Eris Keys is a simple **dev-only** tool for generating keys, producing and verifying signatures. These features are exposed through the [Monax Tool Platform](https://monax.io/docs)
 
 ## Table of Contents
 
@@ -34,13 +29,16 @@ adding support for ED25519, and using AES-GCM for encryption. And of course the 
 
 ## Installation
 
-`eris-keys` is intended to be used an eris service with [eris-cli](https://monax.io/docs/documentation/cli), e.g., `eris services start keys`.
+`eris-keys` is intended to be used as a service with the [Monax CLI](https://monax.io/docs), e.g., `eris services start keys`.
 
 ### For Developers
 
 1. [Install go](https://golang.org/doc/install)
 2. Ensure you have gmp installed (sudo apt-get install libgmp3-dev || brew install gmp)
-3. `go get github.com/eris-ltd/eris-keys`
+3. Ensure you have glide installed (go get github.com/Masterminds/glide)
+4. `go get github.com/monax/keys`
+5. `glide install`
+6. `go install ./cmd/eris-keys`
 
 ## Usage
 
@@ -154,9 +152,6 @@ The endpoints:
 
 
 All arguments are passed as a json encoded map in the body. The response is a struct with two strings: a return value and an error. All arguments and return values that would be byte arrays are presumed hex encoded.
-
-## Contribute
-See the [eris platform contributing file here](https://github.com/eris-ltd/coding/blob/master/github/CONTRIBUTING.md).
 
 ## License
 

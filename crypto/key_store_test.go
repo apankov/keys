@@ -1,7 +1,8 @@
 package crypto
 
 import (
-	"github.com/eris-ltd/common/go/common"
+	"github.com/monax/keys/common"
+
 	"reflect"
 	"testing"
 )

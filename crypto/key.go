@@ -28,11 +28,11 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/monax/keys/crypto/randentropy"
+	"github.com/monax/keys/crypto/secp256k1"
 	"github.com/tendermint/ed25519"
-	"github.com/eris-ltd/eris-keys/crypto/randentropy"
-	"github.com/eris-ltd/eris-keys/crypto/secp256k1"
 
-	"github.com/eris-ltd/eris-keys/crypto/helpers"
+	"github.com/monax/keys/crypto/helpers"
 	uuid "github.com/wayn3h0/go-uuid"
 )
 

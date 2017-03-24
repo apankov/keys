@@ -8,9 +8,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/eris-ltd/common/go/common"
-	log "github.com/eris-ltd/eris-logger"
 	"github.com/howeyc/gopass"
+	"github.com/monax/keys/common"
 )
 
 //------------------------------------------------------------
@@ -20,8 +19,8 @@ func hiddenAuth() string {
 	fmt.Printf("Enter Password:")
 	pwd, err := gopass.GetPasswdMasked()
 	if err != nil {
- 		common.IfExit(err)
- 	}
+		common.IfExit(err)
+	}
 	return string(pwd)
 }
 
@@ -93,7 +92,7 @@ func Call(method string, args map[string]string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("Error marshaling args map: %v", err)
 	}
-	log.Debugln("calling", url)
+	// log.Debugln("calling", url)
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(b))
 	r, errS, err := requestResponse(req)
 	if err != nil {

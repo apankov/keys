@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 
 	"github.com/rs/cors"
-	log "github.com/eris-ltd/eris-logger"
 )
 
 //------------------------------------------------------------------------
@@ -38,7 +38,7 @@ func StartServer(host, port string) error {
 	mux.HandleFunc("/lock", lockHandler)
 	mux.HandleFunc("/mint", convertMintHandler)
 
-	log.Infof("Starting eris-keys server on %s:%s\n", host, port)
+	log.Printf("Starting eris-keys server on %s:%s\n", host, port)
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"}, // TODO: dev
 	})
@@ -256,7 +256,7 @@ func nameHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	name, addr := args["name"], args["addr"]
 
-	log.Debugf("name handler. name (%s). addr (%s)\n", name, addr)
+	// log.Debugf("name handler. name (%s). addr (%s)\n", name, addr)
 
 	if name == "" {
 		WriteError(w, fmt.Errorf("please specify a name"))
@@ -280,14 +280,13 @@ func nameHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func nameLsHandler(w http.ResponseWriter, r *http.Request) {
-	_, _, args, err := typeAuthArgs(r)
+	_, _, _, err := typeAuthArgs(r)
 	if err != nil {
 		WriteError(w, err)
 		return
 	}
-	name, addr := args["name"], args["addr"]
-
-	log.Debugf("name ls handler. name (%s). addr (%s)\n", name, addr)
+	// name, addr := args["name"], args["addr"]
+	// log.Debugf("name ls handler. name (%s). addr (%s)\n", name, addr)
 
 	names, err := coreNameList()
 	if err != nil {
@@ -310,9 +309,9 @@ func nameRmHandler(w http.ResponseWriter, r *http.Request) {
 		WriteError(w, err)
 		return
 	}
-	name, addr := args["name"], args["addr"]
-
-	log.Debugf("name rm handler. name (%s). addr (%s)\n", name, addr)
+	name := args["name"]
+	// name, addr := args["name"], args["addr"]
+	// log.Debugf("name rm handler. name (%s). addr (%s)\n", name, addr)
 
 	if name == "" {
 		WriteError(w, fmt.Errorf("please specify a name"))
@@ -335,7 +334,7 @@ func typeAuthArgs(r *http.Request) (typ string, auth string, args map[string]str
 		return
 	}
 
-	log.Debugln("Request body:", string(b))
+	// log.Debugln("Request body:", string(b))
 
 	if err = json.Unmarshal(b, &args); err != nil {
 		return

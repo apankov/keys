@@ -3,10 +3,11 @@ package crypto
 import (
 	"crypto/aes"
 	"crypto/cipher"
-	"fmt"
 	"crypto/sha256"
-	"github.com/eris-ltd/eris-keys/crypto/sha3"
-	"github.com/eris-ltd/eris-keys/crypto/helpers"
+	"fmt"
+
+	"github.com/monax/keys/crypto/helpers"
+	"github.com/monax/keys/crypto/sha3"
 
 	"golang.org/x/crypto/ripemd160"
 )

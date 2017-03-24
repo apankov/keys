@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/eris-ltd/eris-keys/crypto/secp256k1"
+	"github.com/monax/keys/crypto/secp256k1"
 )
 
 func Test0Key(t *testing.T) {
