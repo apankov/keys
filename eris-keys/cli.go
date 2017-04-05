@@ -13,7 +13,7 @@ import (
 )
 
 func ExitConnectErr(err error) {
-	Exit(fmt.Errorf("Could not connect to eris-keys server. Start it with `eris-keys server &`. Error: %v", err))
+	Exit(fmt.Errorf("Could not connect to monax-keys server. Start it with `monax-keys server &`. Error: %v", err))
 }
 
 func cliServer(cmd *cobra.Command, args []string) {

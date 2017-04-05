@@ -17,7 +17,7 @@
 package keys
 
 // NOTE: this file is copied from github.com/ethereum/go-ethereum
-// and repurposed to suit the eris-keys daemon.
+// and repurposed to suit the monax-keys daemon.
 // We really only wanted the TimeoutUnlock feature
 
 import (
