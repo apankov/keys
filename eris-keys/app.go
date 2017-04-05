@@ -12,10 +12,10 @@ import (
 func init() {
 
 	// note these are only for use by the client
-	if keysHost := os.Getenv("ERIS_KEYS_HOST"); keysHost != "" {
+	if keysHost := os.Getenv("MONAX_KEYS_HOST"); keysHost != "" {
 		DefaultHost = keysHost
 	}
-	if keysPort := os.Getenv("ERIS_KEYS_PORT"); keysPort != "" {
+	if keysPort := os.Getenv("MONAX_KEYS_PORT"); keysPort != "" {
 		DefaultPort = keysPort
 	}
 }
