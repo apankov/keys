@@ -82,7 +82,7 @@ do
 	echo "... $KEYTYPE"
 	# create a key, get its address and priv, backup the json, delete the key
 	ADDR=`monax-keys gen --type $KEYTYPE --no-pass`
-	DIR=/home/$USER/.monax/keys/data/$ADDR
+	DIR=$HOME/.monax/keys/data/$ADDR
 	FILE=$DIR/$ADDR
 	PRIV=`cat $FILE |  jq -r .PrivateKey`
 	HEXPRIV=`echo -n "$PRIV" | base64 -d | hexdump -ve '1/1 "%.2X"'`

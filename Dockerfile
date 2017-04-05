@@ -5,6 +5,9 @@ MAINTAINER Monax <support@monax.io>
 ENV TARGET monax-keys
 ENV REPO $GOPATH/src/github.com/monax/keys
 
+# required for testing; should be removed
+RUN apk --no-cache --update add openssl
+
 ADD ./glide.yaml $REPO/
 ADD ./glide.lock $REPO/
 WORKDIR $REPO
@@ -16,7 +19,8 @@ RUN cd $REPO/cmd/$TARGET && \
 
 # build customizations start here
 # install mint-key [to be deprecated]
-ENV MONAX_KEYS_MINT_REPO github.com/monax/mint-client
+# NOTE: repo must remain [eris-ltd] to Godep reasons
+ENV MONAX_KEYS_MINT_REPO github.com/eris-ltd/mint-client
 ENV MONAX_KEYS_MINT_SRC_PATH $GOPATH/src/$MONAX_KEYS_MINT_REPO
 
 WORKDIR $MONAX_KEYS_MINT_SRC_PATH
