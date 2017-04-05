@@ -1,4 +1,4 @@
-FROM quay.io/monax/build
+FROM quay.io/monax/build:0.16
 MAINTAINER Monax <support@monax.io>
 
 # Install monax-keys, a go app for development signing
