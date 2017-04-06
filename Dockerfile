@@ -1,9 +1,12 @@
-FROM quay.io/eris/build
+FROM quay.io/monax/build:0.16
 MAINTAINER Monax <support@monax.io>
 
-# Install eris-keys, a go app for development signing
-ENV TARGET eris-keys
+# Install monax-keys, a go app for development signing
+ENV TARGET monax-keys
 ENV REPO $GOPATH/src/github.com/monax/keys
+
+# required for testing; should be removed
+RUN apk --no-cache --update add openssl
 
 ADD ./glide.yaml $REPO/
 ADD ./glide.lock $REPO/
@@ -16,8 +19,7 @@ RUN cd $REPO/cmd/$TARGET && \
 
 # build customizations start here
 # install mint-key [to be deprecated]
-# NOTE: repo needs to refer eris-ltd to ensure the gopath to have old
-# directory name for mint-client; ready for deprecation
+# NOTE: repo must remain [eris-ltd] to Godep reasons
 ENV MONAX_KEYS_MINT_REPO github.com/eris-ltd/mint-client
 ENV MONAX_KEYS_MINT_SRC_PATH $GOPATH/src/$MONAX_KEYS_MINT_REPO
 
@@ -26,5 +28,5 @@ WORKDIR $MONAX_KEYS_MINT_SRC_PATH
 RUN git clone --quiet https://$MONAX_KEYS_MINT_REPO . \
   && git checkout --quiet master \
   && go build --ldflags '-extldflags "-static"' -o $INSTALL_BASE/mintkey ./mintkey \
-  && unset ERIS_KEYS_MINT_REPO \
-  && unset ERIS_KEYS_MINT_SRC_PATH
+  && unset MONAX_KEYS_MINT_REPO \
+  && unset MONAX_KEYS_MINT_SRC_PATH

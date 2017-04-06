@@ -1,7 +1,7 @@
-FROM quay.io/eris/base:alpine
+FROM quay.io/monax/base:0.16
 MAINTAINER Monax <support@monax.io>
 
-ENV TARGET eris-keys
+ENV TARGET monax-keys
 
 # runtime customization start here
 # install mint-key [to be deprecated]
@@ -15,12 +15,12 @@ RUN chmod +x $INSTALL_BASE/$TARGET
 
 # Finalize
 RUN chown --recursive $USER:$USER /home/$USER
-VOLUME $ERIS
-WORKDIR $ERIS
+VOLUME $MONAX_PATH
+WORKDIR $MONAX_PATH
 USER $USER
 
 # runtime customization start here
 # expose port 4767
 EXPOSE 4767
 
-CMD [ "eris-keys", "server", "--host", "0.0.0.0", "--log", "3", "-d" ]
+CMD [ "monax-keys", "server", "--host", "0.0.0.0", "--log", "3", "-d" ]

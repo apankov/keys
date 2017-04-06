@@ -9,7 +9,7 @@ import (
 var (
 	// Convenience directories.
 	MonaxRoot          = ResolveMonaxRoot()
-	MonaxContainerRoot = "/home/eris/.eris"
+	MonaxContainerRoot = "/home/monax/.monax"
 
 	// Major directories.
 	KeysPath    = filepath.Join(MonaxRoot, "keys")
@@ -30,19 +30,19 @@ func HomeDir() string {
 }
 
 func ResolveMonaxRoot() string {
-	var eris string
-	if os.Getenv("ERIS") != "" {
-		eris = os.Getenv("ERIS")
+	var monax string
+	if os.Getenv("MONAX") != "" {
+		monax = os.Getenv("MONAX")
 	} else {
 		if runtime.GOOS == "windows" {
 			home := os.Getenv("HOMEDRIVE") + os.Getenv("HOMEPATH")
 			if home == "" {
 				home = os.Getenv("USERPROFILE")
 			}
-			eris = filepath.Join(home, ".eris")
+			monax = filepath.Join(home, ".monax")
 		} else {
-			eris = filepath.Join(HomeDir(), ".eris")
+			monax = filepath.Join(HomeDir(), ".monax")
 		}
 	}
-	return eris
+	return monax
 }

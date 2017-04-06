@@ -38,7 +38,7 @@ func StartServer(host, port string) error {
 	mux.HandleFunc("/lock", lockHandler)
 	mux.HandleFunc("/mint", convertMintHandler)
 
-	log.Printf("Starting eris-keys server on %s:%s\n", host, port)
+	log.Printf("Starting monax-keys server on %s:%s\n", host, port)
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"}, // TODO: dev
 	})

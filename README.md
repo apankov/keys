@@ -1,6 +1,6 @@
-# eris-keys
+# monax-keys
 
-Eris Keys is a simple **dev-only** tool for generating keys, producing and verifying signatures. These features are exposed through the [Monax Tool Platform](https://monax.io/docs)
+Monax Keys is a simple **dev-only** tool for generating keys, producing and verifying signatures. These features are exposed through the [Monax Tool Platform](https://monax.io/docs)
 
 ## Table of Contents
 
@@ -29,7 +29,7 @@ adding support for ED25519, and using AES-GCM for encryption. And of course the 
 
 ## Installation
 
-`eris-keys` is intended to be used as a service with the [Monax CLI](https://monax.io/docs), e.g., `eris services start keys`.
+`monax-keys` is intended to be used as a service with the [Monax CLI](https://monax.io/docs), e.g., `monax services start keys`.
 
 ### For Developers
 
@@ -38,44 +38,44 @@ adding support for ED25519, and using AES-GCM for encryption. And of course the 
 3. Ensure you have glide installed (go get github.com/Masterminds/glide)
 4. `go get github.com/monax/keys`
 5. `glide install`
-6. `go install ./cmd/eris-keys`
+6. `go install ./cmd/monax-keys`
 
 ## Usage
 
-The `eris-keys` cli works over an http server. To start the server run `eris-keys server &`
+The `monax-keys` cli works over an http server. To start the server run `monax-keys server &`
 
 ### Generate a key, sign something, verify the signature
 
 ```
-$ ADDR=`eris-keys gen --no-pass`
-$ PUB=`eris-keys pub --addr $ADDR`
+$ ADDR=`monax-keys gen --no-pass`
+$ PUB=`monax-keys pub --addr $ADDR`
 $ SOMETHING_TO_SIGN=41b27cb63e3be6074fd28cf5ee739151c92f2ef05f0a1a3cf5ae13de3007fc8e
-$ SIG=`eris-keys sign --addr $ADDR $SOMETHING_TO_SIGN`
+$ SIG=`monax-keys sign --addr $ADDR $SOMETHING_TO_SIGN`
 $ echo $SIG
 7B96F6C19EA50BFF83DEA9C80616BDBDFC885C3E7321EAF92D212CE90B9EB5898FE87D95B0A8286E4A49D0F497223C2DAFD38D50E4F6F3A39F7F7B240FDCEC03
-$ eris-keys verify $SOMETHING_TO_SIGN $SIG $PUB
+$ monax-keys verify $SOMETHING_TO_SIGN $SIG $PUB
 true
 ```
 
 ### Generate a key with a password
 
 ```
-$ eris-keys gen
+$ monax-keys gen
 Enter Password:****
 5A87726028F91E1BC24DD051A3D7CABDBAC6DBD7
 $ ADDR=5A87726028F91E1BC24DD051A3D7CABDBAC6DBD7
-$ eris-keys sign --addr $ADDR $SOMETHING_TO_SIGN
+$ monax-keys sign --addr $ADDR $SOMETHING_TO_SIGN
 account is locked
-$ eris-keys unlock --addr $ADDR
+$ monax-keys unlock --addr $ADDR
 Enter Password:****
 5A87726028F91E1BC24DD051A3D7CABDBAC6DBD7 unlocked
-$ eris-keys sign --addr $ADDR $SOMETHING_TO_SIGN
+$ monax-keys sign --addr $ADDR $SOMETHING_TO_SIGN
 63C1563853EC12CB3EAF14EDC918AC2C5287943D0601434376D70C17380C674BB0EA9F1AC24EF3276D89AAED56E353F4AAD5B276BC3B0BB96EA0EB50EA95BA0F
 ```
 
-Notice how the first time we try to sign, the account is locked. `eris-keys unlock` will unlock by default for 10 minutes. Use the `--time` flag to specify otherwise.
+Notice how the first time we try to sign, the account is locked. `monax-keys unlock` will unlock by default for 10 minutes. Use the `--time` flag to specify otherwise.
 
-A key can be relocked with `eris-keys lock --addr $ADDR`
+A key can be relocked with `monax-keys lock --addr $ADDR`
 
 ### Other key types
 
@@ -92,22 +92,22 @@ The default is `ed25519,ripemd160`. The flag is only needed for `gen`, `import`,
 Use a `--name` instead of the `--addr`:
 
 ```
-$ ADDR=`eris-keys gen --name mykey --no-pass`
-$ eris-keys pub --name mykey
+$ ADDR=`monax-keys gen --name mykey --no-pass`
+$ monax-keys pub --name mykey
 4A976DD66E4245DC6BF06DA09A856C4E28CAA514CCAEC74976A47BCF1124801A
-$ eris-keys pub --addr $ADDR
+$ monax-keys pub --addr $ADDR
 4A976DD66E4245DC6BF06DA09A856C4E28CAA514CCAEC74976A47BCF1124801A
 ```
 
-Use the `eris-keys name` command to change names, remove them, or list them.
+Use the `monax-keys name` command to change names, remove them, or list them.
 
 ### Help
 
-Run `eris-keys` or `eris-keys <cmd> --help` for more information about the commands
+Run `monax-keys` or `monax-keys <cmd> --help` for more information about the commands
 
 ## API
 
-Start the daemon with `eris-keys --host localhost --port 12345 server`
+Start the daemon with `monax-keys --host localhost --port 12345 server`
 
 The endpoints:
 
