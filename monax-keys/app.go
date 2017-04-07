@@ -12,10 +12,10 @@ import (
 func init() {
 
 	// note these are only for use by the client
-	if keysHost := os.Getenv("ERIS_KEYS_HOST"); keysHost != "" {
+	if keysHost := os.Getenv("MONAX_KEYS_HOST"); keysHost != "" {
 		DefaultHost = keysHost
 	}
-	if keysPort := os.Getenv("ERIS_KEYS_PORT"); keysPort != "" {
+	if keysPort := os.Getenv("MONAX_KEYS_PORT"); keysPort != "" {
 		DefaultPort = keysPort
 	}
 }
@@ -58,7 +58,7 @@ var (
 )
 
 var EKeys = &cobra.Command{
-	Use:   "eris-keys",
+	Use:   "monax-keys",
 	Short: "Generate and manage keys for producing signatures",
 	Long:  "A tool for doing a bunch of cool stuff with keys.",
 	Run:   func(cmd *cobra.Command, args []string) { cmd.Help() },
@@ -110,8 +110,8 @@ var unlockCmd = &cobra.Command{
 
 var nameCmd = &cobra.Command{
 	Use:   "name",
-	Short: "Manage key names. `eris-keys name <name> <address>`",
-	Long:  "Manage key names. `eris-keys name <name> <address>`",
+	Short: "Manage key names. `monax-keys name <name> <address>`",
+	Long:  "Manage key names. `monax-keys name <name> <address>`",
 	Run:   cliName,
 }
 
@@ -131,48 +131,48 @@ var nameRmCmd = &cobra.Command{
 
 var signCmd = &cobra.Command{
 	Use:   "sign",
-	Short: "eris-keys sign --addr <address> <hash>",
-	Long:  "eris-keys sign --addr <address> <hash>",
+	Short: "monax-keys sign --addr <address> <hash>",
+	Long:  "monax-keys sign --addr <address> <hash>",
 	Run:   cliSign,
 }
 
 var pubKeyCmd = &cobra.Command{
 	Use:   "pub",
-	Short: "eris-keys pub --addr <addr>",
-	Long:  "eris-keys pub --addr <addr>",
+	Short: "monax-keys pub --addr <addr>",
+	Long:  "monax-keys pub --addr <addr>",
 	Run:   cliPub,
 }
 
 var verifyCmd = &cobra.Command{
 	Use:   "verify",
-	Short: "eris-keys verify --addr <addr> <hash> <sig>",
-	Long:  "eris-keys verify --addr <addr> <hash> <sig>",
+	Short: "monax-keys verify --addr <addr> <hash> <sig>",
+	Long:  "monax-keys verify --addr <addr> <hash> <sig>",
 	Run:   cliVerify,
 }
 
 var convertCmd = &cobra.Command{
 	Use:   "convert",
-	Short: "eris-keys convert --addr <address>",
-	Long:  "eris-keys convert --addr <address>",
+	Short: "monax-keys convert --addr <address>",
+	Long:  "monax-keys convert --addr <address>",
 	Run:   cliConvert,
 }
 
 var hashCmd = &cobra.Command{
 	Use:   "hash",
-	Short: "eris-keys hash <some data>",
-	Long:  "eris-keys hash <some data>",
+	Short: "monax-keys hash <some data>",
+	Long:  "monax-keys hash <some data>",
 	Run:   cliHash,
 }
 var serverCmd = &cobra.Command{
 	Use:   "server",
-	Short: "eris-keys server",
-	Long:  "eris-keys server",
+	Short: "monax-keys server",
+	Long:  "monax-keys server",
 	Run:   cliServer,
 }
 var importCmd = &cobra.Command{
 	Use:   "import",
-	Short: "eris-keys import <priv key> | /path/to/keyfile | <key json>",
-	Long:  "eris-keys import <priv key> | /path/to/keyfile | <key json>",
+	Short: "monax-keys import <priv key> | /path/to/keyfile | <key json>",
+	Long:  "monax-keys import <priv key> | /path/to/keyfile | <key json>",
 	Run:   cliImport,
 }
 

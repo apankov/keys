@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/monax/keys/eris-keys"
+	"github.com/monax/keys/monax-keys"
 )
 
 func main() {

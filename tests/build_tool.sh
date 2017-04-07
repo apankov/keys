@@ -2,7 +2,7 @@
 # ----------------------------------------------------------
 # PURPOSE
 
-# This is the build script for the eris stack. It will
+# This is the build script for the monax stack. It will
 # build the tool into docker containers in a reliable and
 # predicatable manner.
 
@@ -18,8 +18,8 @@
 
 # ----------------------------------------------------------
 
-TARGET=eris-keys
-IMAGE=quay.io/eris/keys
+TARGET=monax-keys
+IMAGE=quay.io/monax/keys
 
 set -e
 
