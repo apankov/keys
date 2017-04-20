@@ -16,17 +16,3 @@ RUN glide install
 COPY . $REPO/.
 RUN cd $REPO/cmd/$TARGET && \
   go build --ldflags '-extldflags "-static"' -o $INSTALL_BASE/$TARGET
-
-# build customizations start here
-# install mint-key [to be deprecated]
-# NOTE: repo must remain [eris-ltd] to Godep reasons
-ENV MONAX_KEYS_MINT_REPO github.com/eris-ltd/mint-client
-ENV MONAX_KEYS_MINT_SRC_PATH $GOPATH/src/$MONAX_KEYS_MINT_REPO
-
-WORKDIR $MONAX_KEYS_MINT_SRC_PATH
-
-RUN git clone --quiet https://$MONAX_KEYS_MINT_REPO . \
-  && git checkout --quiet master \
-  && go build --ldflags '-extldflags "-static"' -o $INSTALL_BASE/mintkey ./mintkey \
-  && unset MONAX_KEYS_MINT_REPO \
-  && unset MONAX_KEYS_MINT_SRC_PATH
