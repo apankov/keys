@@ -39,16 +39,11 @@ docker build -t $IMAGE:build $REPO
 docker run --rm --entrypoint cat $IMAGE:build /usr/local/bin/$TARGET > $REPO/"$TARGET"_build_artifact
 
 #-----------------------------------------------------------------------------
-# install mint-key [to be deprecated]
-docker run --rm --entrypoint cat $IMAGE:build /usr/local/bin/mintkey > $REPO/mintkey
-# [end to be deprecated]
-#-----------------------------------------------------------------------------
 
 docker build -t $IMAGE:$release_min -f Dockerfile.deploy $REPO
 
 # Cleanup
 rm $REPO/"$TARGET"_build_artifact
-rm $REPO/mintkey
 
 # Extra Tags
 if [[ "$branch" = "master" ]]
