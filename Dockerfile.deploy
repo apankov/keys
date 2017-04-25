@@ -3,12 +3,6 @@ MAINTAINER Monax <support@monax.io>
 
 ENV TARGET monax-keys
 
-# runtime customization start here
-# install mint-key [to be deprecated]
-COPY ./mintkey $INSTALL_BASE/mintkey
-RUN chmod +x $INSTALL_BASE/mintkey
-# runtime customization end here
-
 # Get the binary from the artifact in pwd
 COPY ./"$TARGET"_build_artifact $INSTALL_BASE/$TARGET
 RUN chmod +x $INSTALL_BASE/$TARGET
