@@ -28,12 +28,10 @@ deployment:
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS quay.io
       - tests/build_tool.sh
-      - "docker tag quay.io/monax/keys:build throw:build && docker rmi quay.io/monax/keys:build"
       - docker push quay.io/monax/keys
   develop:
     branch: develop
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS quay.io
       - tests/build_tool.sh
-      - "docker rmi quay.io/monax/keys:latest && docker tag quay.io/monax/keys:build throw:build && docker rmi quay.io/monax/keys:build"
       - docker push quay.io/monax/keys
