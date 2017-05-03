@@ -2,7 +2,7 @@
 # ----------------------------------------------------------
 # PURPOSE
 
-# This is the build script for the monax stack. It will
+# This is the build script for the monax keys. It will
 # build the tool into docker containers in a reliable and
 # predicatable manner.
 
@@ -23,7 +23,7 @@ IMAGE=quay.io/monax/keys
 
 set -e
 
-if [ "$JENKINS_URL" ] || [ "$CIRCLE_BRANCH" ]
+if [ "$CIRCLE_BRANCH" ]
 then
   REPO=`pwd`
   CI="true"
@@ -40,19 +40,9 @@ docker run --rm --entrypoint cat $IMAGE:build /usr/local/bin/$TARGET > $REPO/"$T
 
 #-----------------------------------------------------------------------------
 
-docker build -t $IMAGE:$release_min -f Dockerfile.deploy $REPO
+docker build -t $IMAGE:$release_maj -f Dockerfile.deploy $REPO
 
 # Cleanup
 rm $REPO/"$TARGET"_build_artifact
 
-# Extra Tags
-if [[ "$branch" = "master" ]]
-then
-  docker tag -f $IMAGE:$release_min $IMAGE:$release_maj
-  docker tag -f $IMAGE:$release_min $IMAGE:latest
-fi
-
-if [ "$CIRCLE_BRANCH" ]
-then
-  docker tag -f $IMAGE:$release_min $IMAGE:latest
-fi
+docker rmi $IMAGE:build
